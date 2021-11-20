@@ -6,4 +6,5 @@ public interface ServicioTiposDePago {
 	ArrayList<string> ListarPagos();
 	boolean EliminarPago(int IDpago, ArrayList ListarPagos);
 	
+	boolean verificarImpuesto(string tipoDeRemuneracion);
 }
