@@ -1,13 +1,16 @@
 package sitema.interfaces;
 
+import sitema.domain.Usuario;
+
 public interface ServicioMembresia {
 	
-	boolean verificarExpiracion(date fechaInvitacion, int IDusuario);
 	
-	boolean verificarTipoMembresia(string rol, int IDusuario);
+	boolean verificarExpiracion(String fechaInvitacion, int idUsuario );
 	
-	boolean otorgarMembresia(int IDusuario);
+	boolean verificarTipoMembresia(String rol, int idUsuario);
+	
+	boolean otorgarMembresia(int idUsuario);
 
-	boolean eliminarMembresia(int IDusuario);
+	boolean eliminarMembresia(int idUsuario);
 	
 }

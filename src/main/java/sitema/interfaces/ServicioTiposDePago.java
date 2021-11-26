@@ -1,13 +1,20 @@
 import java.util.ArrayList;
 
-public interface ServicioTiposDePago {
+import sitema.domain.BilleteraDigital;
+import sitema.domain.Tarjeta;
 
-	boolean InsertarPago(string NombreProyecto, string monto, string FormaDePago);
+public interface ServicioTiposDePago {
 	
-	ArrayList<string> ListarPagos();
 	
-	boolean EliminarPago(int IDpago, ArrayList ListarPagos);
+	Tarjeta getDatosTarjeta();
+	BilleteraDigital getDatosBilletera();
+
+	boolean insertarPago(String nombreProyecto, String monto, String formaDePago);
 	
-	boolean verificarImpuesto(string tipoDeRemuneracion);
+	ArrayList<String> ListarPagos();
+	
+	boolean eliminarPago(int idPago, ArrayList listarPagos);
+	
+	boolean verificarImpuesto(String tipoDeRemuneracion);
 	
 }

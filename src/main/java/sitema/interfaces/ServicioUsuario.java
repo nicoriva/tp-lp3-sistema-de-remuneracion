@@ -1,19 +1,21 @@
 import java.util.ArrayList;
 
+import sitema.domain.Usuario;
+
 public interface ServicioUsuario {
 
-	boolean registro(string NombreUsuario, string correo, string rol, string contrasenha);
+	boolean registro(String nombreUsuario, String correo, String rol, String contrasenha);
 	
-	public usuario asignarRol(string rol);
+	public Usuario asignarRol(String rol);
 	
-	boolean IniciarSesion(string NombreUsuario, string contrasenha);
+	boolean IniciarSesion(String nombreUsuario, String contrasenha);
 	
-	ArrayList<string> AgruparRoles(int IDusuario, string rol);
+	ArrayList<String> AgruparRoles(int idUsuario, String rol);
 
-	string Financiar(int monto, string FormaDePago);
+	String Financiar(int monto, String formaDePago);
 
-	ArrayList ListarUsuarios(int IDusuario);
+	ArrayList ListarUsuarios(int idUsuario);
 
-	boolean EliminarUsuario(int IDusuario);
+	boolean EliminarUsuario(int idUsuario);
 
 }
