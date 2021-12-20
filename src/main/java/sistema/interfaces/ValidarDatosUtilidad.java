@@ -1,6 +1,6 @@
-package sitema.interfaces;
+package sistema.interfaces;
 
-import sitema.domain.Usuario;
+import sistema.domain.Usuario;
 
 public class ValidarDatosUtilidad {
 	

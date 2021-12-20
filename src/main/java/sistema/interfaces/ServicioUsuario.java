@@ -1,6 +1,8 @@
+package sistema.interfaces;
+
 import java.util.ArrayList;
 
-import sitema.domain.Usuario;
+import sistema.domain.Usuario;
 
 public interface ServicioUsuario {
 

@@ -1,4 +1,4 @@
-package sitema.domain;
+package sistema.domain;
 
 
 public class Tarjeta extends Pago{

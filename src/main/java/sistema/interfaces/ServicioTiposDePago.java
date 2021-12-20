@@ -1,7 +1,9 @@
+package sistema.interfaces;
+
 import java.util.ArrayList;
 
-import sitema.domain.BilleteraDigital;
-import sitema.domain.Tarjeta;
+import sistema.domain.BilleteraDigital;
+import sistema.domain.Tarjeta;
 
 public interface ServicioTiposDePago {
 	
