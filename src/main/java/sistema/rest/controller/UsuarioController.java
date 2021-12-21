@@ -41,7 +41,7 @@ public class UsuarioController {
 		return usuarios;
 		} catch (Exception error) {
 			System.out.println(error);
-			throw new ValidarDatosException("Ocurrió un error inesperado al listar roles.");//Mensaje correcto?
+			throw new ValidarDatosException("Ocurrió un error inesperado al buscar por roles.");
 		}
 	}
 	

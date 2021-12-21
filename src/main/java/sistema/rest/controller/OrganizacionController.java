@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import sistema.constantes.ApiPaths;
 import sistema.domain.Organizacion;
+import sistema.exceptions.ValidarDatosException;
 import sistema.servicios.impl.ServicioOrganizacionImpl;
 
 @RestController
@@ -22,19 +23,33 @@ public class OrganizacionController {
 	private ServicioOrganizacionImpl servicioOrganizacion;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public List<Organizacion> list() {
+	public List<Organizacion> list() throws ValidarDatosException {
+		try {
 		return servicioOrganizacion.findAll();
-	}
+		} catch (Exception error){
+			System.out.println(error);
+			throw new ValidarDatosException("Ocurrió un error inesperado al listar organizaciones.");
+		}
+	}	
 	
 	@RequestMapping(value = "/{tipoDeOrganizacion}", method = RequestMethod.GET)
-	public List<Organizacion> greetings(@PathVariable("tipoDeOrganizacion") String tipoDeOrganizacion) {
+	public List<Organizacion> greetings(@PathVariable("tipoDeOrganizacion") String tipoDeOrganizacion) throws ValidarDatosException {
+		try {
 		List<Organizacion> organizaciones = servicioOrganizacion.findByTipoDeOrganizacion(tipoDeOrganizacion);
 		return organizaciones;
+		} catch(Exception error){
+			System.out.println(error);
+			throw new ValidarDatosException("Ocurrió un error inesperado al buscar por tipo de organización.");
+		}
 	}
 	
 	@PostMapping
-	public void add(@RequestBody Organizacion organizaciones) {
+	public void add(@RequestBody Organizacion organizaciones) throws ValidarDatosException {
+		try {
 		servicioOrganizacion.save(organizaciones);
+		} catch(Exception error) {
+			throw new ValidarDatosException("Ocurrió un error inesperado al guardar organizaciones.");
+		}
 	}
 	
 	
