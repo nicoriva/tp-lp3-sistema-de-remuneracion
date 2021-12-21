@@ -1,6 +1,8 @@
 package sistema.interfaces;
 
+import py.edu.uc.lp3.exceptions.MapaException;
 import sistema.domain.Usuario;
+import sistema.exceptions.ValidarDatosException;
 
 public class ValidarDatosUtilidad {
 	
@@ -19,11 +21,10 @@ public class ValidarDatosUtilidad {
 	}
 	
 	//utilidad para validar los datos de un usuario
-	public static void validarDatosUsuario(Usuario usuario) {
+	public static void validarDatosUsuario(Usuario usuario) throws ValidarDatosException {
 		
 		if (esCorto(usuario.getNombreUsuario()) ) {
-			//lanzar excepcion
-			System.out.println("El nombre de usuario" + usuario.getNombreUsuario() + " es muy corto");
+			throw new ValidarDatosException("El nombre de usuario" + usuario.getNombreUsuario() + " es muy corto");
 		}
 		
 		
