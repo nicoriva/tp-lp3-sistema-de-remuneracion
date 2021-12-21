@@ -48,7 +48,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario{
 	}
 
 	@Override
-	public ArrayList ListarUsuarios(int idUsuario) {
+	public ArrayList<Usuario> ListarUsuarios(int idUsuario) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -91,7 +91,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario{
 	@Override
 	public void notificarExpiracion() {
 		//obtener usuarios con credencial vencida
-		List<Usuario> usuarios = usuarioRepositorio.findUsuariosMembresiaExpirada();
+		//List<Usuario> usuarios = usuarioRepositorio.findUsuariosMembresiaExpirada();
 		
 	}
 
