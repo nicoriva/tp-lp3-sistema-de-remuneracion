@@ -1,8 +1,8 @@
-package sistema.interfaces;
+package sistema.utilidades;
 
-import py.edu.uc.lp3.exceptions.MapaException;
 import sistema.domain.Usuario;
 import sistema.exceptions.ValidarDatosException;
+import sistema.interfaces.ServicioMembresia;
 
 public class ValidarDatosUtilidad {
 	
