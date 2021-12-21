@@ -1,6 +1,7 @@
-package sistema.interfaces;
+package sistema.utilidades;
 
 import sistema.domain.Usuario;
+import sistema.interfaces.ServicioMembresia;
 
 public class ValidarDatosUtilidad {
 	

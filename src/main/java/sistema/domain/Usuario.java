@@ -1,5 +1,13 @@
 package sistema.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import java.util.Date;
+
+@Entity
 public class Usuario {
 
 	String nombreUsuario;
@@ -7,8 +15,10 @@ public class Usuario {
 	String rol;
 	String correo;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	int idUsuario;
-	String fechaInvitacion;
+	Date fechaInvitacion;
 	
 	
 	
@@ -18,10 +28,10 @@ public class Usuario {
 	public void setIdUsuario(int idUsuario) {
 		this.idUsuario = idUsuario;
 	}
-	public String getFechaInvitacion() {
+	public Date getFechaInvitacion() {
 		return fechaInvitacion;
 	}
-	public void setFechaInvitacion(String fechaInvitacion) {
+	public void setFechaInvitacion(Date fechaInvitacion) {
 		this.fechaInvitacion = fechaInvitacion;
 	}
 	public String getNombreUsuario() {

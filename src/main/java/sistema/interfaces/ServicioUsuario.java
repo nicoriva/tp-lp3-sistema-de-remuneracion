@@ -1,6 +1,7 @@
 package sistema.interfaces;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import sistema.domain.Usuario;
 
@@ -19,5 +20,10 @@ public interface ServicioUsuario {
 	ArrayList ListarUsuarios(int idUsuario);
 
 	boolean EliminarUsuario(int idUsuario);
+	
+	//listar todos los usuarios
+	List<Usuario> findAll();
+
+	List<Usuario> findByRol(String rol);
 
 }
