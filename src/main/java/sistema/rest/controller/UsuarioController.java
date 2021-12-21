@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import sistema.constantes.ApiPaths;
 import sistema.domain.Usuario;
+import sistema.exceptions.ValidarDatosException;
 import sistema.servicios.impl.ServicioUsuarioImpl;
 
 @RestController
@@ -25,25 +26,43 @@ public class UsuarioController {
 	 * Llama a la funcion para ver a todos los usuarios
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public List<Usuario> list() {
-		return servicioUsuario.findAll();
+	public List<Usuario> list() throws ValidarDatosException {
+		try {
+			return servicioUsuario.findAll();
+		} catch (Exception error) {
+			System.out.println(error);
+			throw new ValidarDatosException("Ocurrió un error inesperado al listar usuarios.");
+		}
 	}
 	
 	@RequestMapping(value = "/{rol}", method = RequestMethod.GET)
-	public List<Usuario> greetings(@PathVariable("rol") String rol) {
-		List<Usuario> usuarios = servicioUsuario.findByRol(rol);
+	public List<Usuario> greetings(@PathVariable("rol") String rol) throws ValidarDatosException {
+		try { List<Usuario> usuarios = servicioUsuario.findByRol(rol);
 		return usuarios;
+		} catch (Exception error) {
+			System.out.println(error);
+			throw new ValidarDatosException("Ocurrió un error inesperado al listar roles.");//Mensaje correcto?
+		}
 	}
 	
 	@PostMapping
-	public void add(@RequestBody Usuario usuarios) {
-		servicioUsuario.save(usuarios);
+	public void add(@RequestBody Usuario usuarios) throws ValidarDatosException{
+		try {
+			servicioUsuario.save(usuarios);
+		} catch (Exception error){ 
+			System.out.println(error);
+			throw new ValidarDatosException("Ocurrió un error inesperado al agregar usuario.");
+		}
 	}
 	
 	@RequestMapping(value = "/notificar-expiracion", method = RequestMethod.GET)
-	public void notificarExpiracionUsuarios() {
+	public void notificarExpiracionUsuarios() throws ValidarDatosException {
+		try {
 		servicioUsuario.notificarExpiracion();
-		
+		} catch(Exception error) {
+			System.out.println(error);
+			throw new ValidarDatosException("Ocurrió un error inesperado al notificar vencimiento a usuarios.");
+			}
 	}
 	
 	//

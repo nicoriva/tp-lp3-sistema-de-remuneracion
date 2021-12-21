@@ -1,6 +1,11 @@
 package sistema.exceptions;
 
-public class ValidarDatosException extends Exception {
+public class ValidarDatosException extends Exception{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public ValidarDatosException() {
 		// TODO Auto-generated constructor stub

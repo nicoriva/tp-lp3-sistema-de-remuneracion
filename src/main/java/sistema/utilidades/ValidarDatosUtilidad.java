@@ -7,12 +7,11 @@ import sistema.interfaces.ServicioMembresia;
 public class ValidarDatosUtilidad {
 	
 	
-	public static void validarDatosMembresia(ServicioMembresia datosMembresia, Usuario usuario) {
+	public static void validarDatosMembresia(ServicioMembresia datosMembresia, Usuario usuario) throws ValidarDatosException  {
 		
 		//verificarExpiracion devuelve true si ha expirado la invitacion
 		if ( datosMembresia.verificarExpiracion(usuario.getFechaInvitacion(), usuario.getIdUsuario()) ) {
-			//lanzar excepcion
-			System.out.println("La invitacion ha expirado");
+			throw new ValidarDatosException("La invitacion ha expirado");
 		}
 		
 		
