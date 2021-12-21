@@ -88,6 +88,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario{
 		return usuarios;
 	}
 
+	@Override
 	public void notificarExpiracion() {
 		//obtener usuarios con credencial vencida
 		List<Usuario> usuarios = usuarioRepositorio.findUsuariosMembresiaExpirada();

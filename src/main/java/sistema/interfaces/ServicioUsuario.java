@@ -25,5 +25,7 @@ public interface ServicioUsuario {
 	List<Usuario> findAll();
 
 	List<Usuario> findByRol(String rol);
+	
+	public void notificarExpiracion();
 
 }
