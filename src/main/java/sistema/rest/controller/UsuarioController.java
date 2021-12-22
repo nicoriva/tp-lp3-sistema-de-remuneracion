@@ -65,6 +65,11 @@ public class UsuarioController {
 			}
 	}
 	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public void delete(@PathVariable("id") long id) {
+		servicioUsuario.delete(id);
+	}
+	
 	//
 	/*
 	@RequestMapping(value = "/bulk", method = RequestMethod.POST)

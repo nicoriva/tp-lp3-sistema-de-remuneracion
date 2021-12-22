@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import sistema.domain.Usuario;
 import sistema.interfaces.ServicioUsuario;
 import sistema.repositorios.UsuarioRepositorio;
+import sistema.utilidades.NotificarUtilidad;
 
 @Service
 public class ServicioUsuarioImpl implements ServicioUsuario{
@@ -90,8 +91,17 @@ public class ServicioUsuarioImpl implements ServicioUsuario{
 
 	@Override
 	public void notificarExpiracion() {
-		//obtener usuarios con credencial vencida
-		//List<Usuario> usuarios = usuarioRepositorio.findUsuariosMembresiaExpirada();
+		List<Usuario> usuarios = usuarioRepositorio.findUsuariosMembresiaPorExpirar();
+		if (usuarios != null) {
+			for(Usuario usuarioANotificar : usuarios) {
+				NotificarUtilidad.notificarVencimientoEmail(usuarioANotificar);
+			}
+		}
+		
+	}
+
+	public void delete(long id) {
+		usuarioRepositorio.deleteById(id);
 		
 	}
 

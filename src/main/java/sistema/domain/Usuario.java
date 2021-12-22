@@ -18,16 +18,16 @@ public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	int idUsuario;
+	long idUsuario;
 	
 	Date fechaInvitacion;
 	
 	
 	
-	public int getIdUsuario() {
+	public long getIdUsuario() {
 		return idUsuario;
 	}
-	public void setIdUsuario(int idUsuario) {
+	public void setIdUsuario(long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 	public Date getFechaInvitacion() {

@@ -7,12 +7,12 @@ import sistema.domain.Usuario;
 public interface ServicioMembresia {
 	
 	
-	boolean verificarExpiracion(Date fechaInvitacion, int idUsuario );
+	boolean verificarExpiracion(Date fechaInvitacion, long idUsuario );
 	
-	boolean verificarTipoMembresia(String rol, int idUsuario);
+	boolean verificarTipoMembresia(String rol, long idUsuario);
 	
-	boolean otorgarMembresia(int idUsuario);
+	boolean otorgarMembresia(long idUsuario);
 
-	boolean eliminarMembresia(int idUsuario);
+	boolean eliminarMembresia(long idUsuario);
 	
 }
