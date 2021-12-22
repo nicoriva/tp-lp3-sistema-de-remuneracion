@@ -53,8 +53,13 @@ public class OrganizacionController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public void delete(@PathVariable("id") long id) {
+	public void delete(@PathVariable("id") long id) throws ValidarDatosException {
+		try {
 		servicioOrganizacion.delete(id);
+		} catch (Exception error) {
+			System.out.println(error);
+			throw new ValidarDatosException("Ocurrió un error inesperado al eliminar Organizacion.");
+		}
 	}
 	
 	

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import sistema.domain.Usuario;
+import sistema.exceptions.ValidarDatosException;
 import sistema.interfaces.ServicioUsuario;
 import sistema.repositorios.UsuarioRepositorio;
 import sistema.utilidades.NotificarUtilidad;
@@ -72,9 +73,13 @@ public class ServicioUsuarioImpl implements ServicioUsuario{
 		return usuarios;
 	}
 	
-	public void save(Usuario usuarios) {
-		usuarioRepositorio.save(usuarios);
-		
+	public void save(Usuario usuarios) throws ValidarDatosException {
+		try {
+			usuarioRepositorio.save(usuarios);
+		} catch(Exception error) {
+			System.out.println(error);
+			throw new ValidarDatosException("Error inesperado al guardar usuario.");
+		}
 	}
 	
 	
@@ -90,26 +95,30 @@ public class ServicioUsuarioImpl implements ServicioUsuario{
 	}
 
 	@Override
-	public void notificarExpiracion() {
-		List<Usuario> usuarios = usuarioRepositorio.findUsuariosMembresiaPorExpirar();
-		if (usuarios != null) {
-			for(Usuario usuarioANotificar : usuarios) {
-				NotificarUtilidad.notificarVencimientoEmail(usuarioANotificar);
+	public void notificarExpiracion() throws ValidarDatosException {
+		try {
+			List<Usuario> usuarios = usuarioRepositorio.findUsuariosMembresiaPorExpirar();
+			if (usuarios != null) {
+				for(Usuario usuarioANotificar : usuarios) {
+					try {
+						NotificarUtilidad.notificarVencimientoEmail(usuarioANotificar);
+					} catch(Exception e) {
+						System.out.println("No se pudo notificar vencimiento al usuario ID: " + usuarioANotificar.getIdUsuario());
+					}
+				}
 			}
+		} catch (Exception e) {
+			throw new ValidarDatosException("Hubo un problema al notificar vencimiento a los usuarios.");
+		}
+	}
+
+	public void delete(long id) throws ValidarDatosException {
+		if(java.lang.Long.getLong("id") != 0L && usuarioRepositorio.existsById(id) ) {
+			usuarioRepositorio.deleteById(id);
+		}else {
+			throw new ValidarDatosException("No se puede eliminar usuario porque no existe en la base de datos");
 		}
 		
 	}
-
-	public void delete(long id) {
-		usuarioRepositorio.deleteById(id);
-		
-	}
-
-	/*
-	public void saveList(List<Usuario> usuarios) {
-		usuarioRepositorio.saveList(usuarios);
-		
-	}
-	*/
 	
 }

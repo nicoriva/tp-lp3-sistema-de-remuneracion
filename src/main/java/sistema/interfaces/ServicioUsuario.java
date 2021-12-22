@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sistema.domain.Usuario;
+import sistema.exceptions.ValidarDatosException;
 
 public interface ServicioUsuario {
 
@@ -26,6 +27,6 @@ public interface ServicioUsuario {
 
 	List<Usuario> findByRol(String rol);
 	
-	public void notificarExpiracion();
+	public void notificarExpiracion() throws ValidarDatosException;
 
 }
