@@ -43,5 +43,10 @@ public class ServicioOrganizacionImpl implements ServicioOrganizacion{
 		}
 		return organizaciones;
 	}
+
+	public void delete(long id) {
+		organizacionRepositorio.deleteById(id);
+		
+	}
 	
 }

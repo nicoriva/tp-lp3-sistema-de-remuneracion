@@ -52,7 +52,10 @@ public class OrganizacionController {
 		}
 	}
 	
-	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public void delete(@PathVariable("id") long id) {
+		servicioOrganizacion.delete(id);
+	}
 	
 	
 	
