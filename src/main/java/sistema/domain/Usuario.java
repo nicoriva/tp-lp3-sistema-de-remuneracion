@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-//@Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario {
 
 	String nombreUsuario;
@@ -21,8 +20,6 @@ public class Usuario {
 	long idUsuario;
 	
 	Date fechaInvitacion;
-	
-	
 	
 	public long getIdUsuario() {
 		return idUsuario;

@@ -1,10 +1,13 @@
 package sistema.exceptions;
 
+/**
+ * Excepcion para verificar datos de usuario
+ * e indicar los mensajes correspondientes
+ * 
+ */
 public class ValidarDatosException extends Exception{
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	public ValidarDatosException() {

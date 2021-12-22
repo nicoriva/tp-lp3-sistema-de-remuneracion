@@ -22,9 +22,7 @@ public class UsuarioController {
 	@Autowired
 	private ServicioUsuarioImpl servicioUsuario;
 	
-	/*
-	 * Llama a la funcion para ver a todos los usuarios
-	 */
+	//llamada a metodo para listar todos los usuarios registrados
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public List<Usuario> list() throws ValidarDatosException {
 		try {
@@ -35,6 +33,7 @@ public class UsuarioController {
 		}
 	}
 	
+	//llamada a metodo para listar todos los usuarios por un rol especifico
 	@RequestMapping(value = "/{rol}", method = RequestMethod.GET)
 	public List<Usuario> greetings(@PathVariable("rol") String rol) throws ValidarDatosException {
 		try { List<Usuario> usuarios = servicioUsuario.findByRol(rol);
@@ -45,42 +44,44 @@ public class UsuarioController {
 		}
 	}
 	
+	//llamada a metodo para agregar un usuario a la lista
 	@PostMapping
 	public void add(@RequestBody Usuario usuarios) throws ValidarDatosException{
 		try {
 			servicioUsuario.save(usuarios);
+		} catch (ValidarDatosException validarDatosException) {
+			throw validarDatosException;
 		} catch (Exception error){ 
 			System.out.println(error);
 			throw new ValidarDatosException("Ocurrió un error inesperado al agregar usuario.");
 		}
 	}
 	
+	//llamada a metodo para notificar usuarios a los cuales su invitacion esta por expirar
 	@RequestMapping(value = "/notificar-expiracion", method = RequestMethod.GET)
 	public void notificarExpiracionUsuarios() throws ValidarDatosException {
 		try {
-		servicioUsuario.notificarExpiracion();
+			servicioUsuario.notificarExpiracion();
+		} catch (ValidarDatosException validarDatosException) {
+			throw validarDatosException;
 		} catch(Exception error) {
 			System.out.println(error);
 			throw new ValidarDatosException("Ocurrió un error inesperado al notificar vencimiento a usuarios.");
 			}
 	}
 	
+	//llamada a metodo para borrar de la lista un usuario por su id
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable("id") long id) throws ValidarDatosException {
 		try {
-		servicioUsuario.delete(id);
+			servicioUsuario.delete(id);
+		} catch (ValidarDatosException validarDatosException) {
+			throw validarDatosException;
 		} catch (Exception error) {
 			System.out.println(error);
 			throw new ValidarDatosException("Ocurrió un error inesperado al eliminar usuario.");
 		}
 	}
 	
-	//
-	/*
-	@RequestMapping(value = "/bulk", method = RequestMethod.POST)
-	public void addBulk(@RequestBody List<Usuario> usuarios) {
-		servicioUsuario.saveList(usuarios);
-	}
-	*/
 
 }

@@ -15,9 +15,7 @@ public class Organizacion{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idOrganizacion;
 	
-	
-	
-	
+
 
 	public Long getIdOrganizacion() {
 		return idOrganizacion;

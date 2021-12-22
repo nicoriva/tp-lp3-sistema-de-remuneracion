@@ -19,6 +19,72 @@ public class ServicioUsuarioImpl implements ServicioUsuario{
 	@Autowired
 	private UsuarioRepositorio usuarioRepositorio;
 	
+	//metodo para listar todos los usuarios
+	@Override
+	public List<Usuario> findAll() {
+		List<Usuario> usuarios = new ArrayList<>();
+		Iterator<Usuario> iteratorUsuarios = usuarioRepositorio.findAll().iterator();
+		while (iteratorUsuarios.hasNext()) {
+			usuarios.add(iteratorUsuarios.next());
+		}
+		return usuarios;
+	}
+	
+	//metodo para agregar usuarios
+	public void save(Usuario usuarios) throws ValidarDatosException {
+		try {
+			usuarioRepositorio.save(usuarios);
+		} catch(Exception error) {
+			System.out.println(error);
+			throw new ValidarDatosException("Error inesperado al guardar usuario.");
+		}
+	}
+	
+	
+	//metodo para listar usuarios por un rol especificado
+	@Override
+	public List<Usuario> findByRol(String rol) {
+		List<Usuario> usuarios = new ArrayList<>();
+		Iterator<Usuario> iteratorUsuarios = usuarioRepositorio.findByRol(rol).iterator();
+		while (iteratorUsuarios.hasNext()) {
+			usuarios.add(iteratorUsuarios.next());
+		}
+		return usuarios;
+	}
+
+	
+	//metodo que verifica expiracion de invitacion y notifica a esos usuarios
+	@Override
+	public void notificarExpiracion() throws ValidarDatosException {
+		try {
+			List<Usuario> usuarios = usuarioRepositorio.findUsuariosMembresiaPorExpirar();
+			if (usuarios != null) {
+				for(Usuario usuarioANotificar : usuarios) {
+					try {
+						NotificarUtilidad.notificarVencimientoEmail(usuarioANotificar);
+					} catch(Exception e) {
+						System.out.println("No se pudo notificar vencimiento al usuario ID: " + usuarioANotificar.getIdUsuario());
+					}
+				}
+			}
+		} catch (Exception e) {
+			throw new ValidarDatosException("Hubo un problema al notificar vencimiento a los usuarios.");
+		}
+	}
+
+	
+	//metodo para eliminar un usuario por id
+	public void delete(long id) throws ValidarDatosException {
+		if( usuarioRepositorio.existsById(id) ) {
+			usuarioRepositorio.deleteById(id);
+		}else {
+			throw new ValidarDatosException("No se puede eliminar usuario porque no existe en la base de datos");
+		}
+		
+	}
+	
+	/* Metodos con posible implementacion generados por ServicioUsuario*/
+	
 	@Override
 	public boolean registro(String nombreUsuario, String correo, String rol, String contrasenha) {
 		// TODO Auto-generated method stub
@@ -49,76 +115,5 @@ public class ServicioUsuarioImpl implements ServicioUsuario{
 		return null;
 	}
 
-	@Override
-	public ArrayList<Usuario> ListarUsuarios(int idUsuario) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean EliminarUsuario(int idUsuario) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	//manual
-	
-	@Override
-	public List<Usuario> findAll() {
-		List<Usuario> usuarios = new ArrayList<>();
-		Iterator<Usuario> iteratorUsuarios = usuarioRepositorio.findAll().iterator();
-		while (iteratorUsuarios.hasNext()) {
-			usuarios.add(iteratorUsuarios.next());
-		}
-		return usuarios;
-	}
-	
-	public void save(Usuario usuarios) throws ValidarDatosException {
-		try {
-			usuarioRepositorio.save(usuarios);
-		} catch(Exception error) {
-			System.out.println(error);
-			throw new ValidarDatosException("Error inesperado al guardar usuario.");
-		}
-	}
-	
-	
-
-	@Override
-	public List<Usuario> findByRol(String rol) {
-		List<Usuario> usuarios = new ArrayList<>();
-		Iterator<Usuario> iteratorUsuarios = usuarioRepositorio.findByRol(rol).iterator();
-		while (iteratorUsuarios.hasNext()) {
-			usuarios.add(iteratorUsuarios.next());
-		}
-		return usuarios;
-	}
-
-	@Override
-	public void notificarExpiracion() throws ValidarDatosException {
-		try {
-			List<Usuario> usuarios = usuarioRepositorio.findUsuariosMembresiaPorExpirar();
-			if (usuarios != null) {
-				for(Usuario usuarioANotificar : usuarios) {
-					try {
-						NotificarUtilidad.notificarVencimientoEmail(usuarioANotificar);
-					} catch(Exception e) {
-						System.out.println("No se pudo notificar vencimiento al usuario ID: " + usuarioANotificar.getIdUsuario());
-					}
-				}
-			}
-		} catch (Exception e) {
-			throw new ValidarDatosException("Hubo un problema al notificar vencimiento a los usuarios.");
-		}
-	}
-
-	public void delete(long id) throws ValidarDatosException {
-		if(java.lang.Long.getLong("id") != 0L && usuarioRepositorio.existsById(id) ) {
-			usuarioRepositorio.deleteById(id);
-		}else {
-			throw new ValidarDatosException("No se puede eliminar usuario porque no existe en la base de datos");
-		}
-		
-	}
 	
 }

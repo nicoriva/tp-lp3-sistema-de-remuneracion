@@ -17,6 +17,7 @@ public class ServicioOrganizacionImpl implements ServicioOrganizacion{
 	@Autowired
 	private OrganizacionRepositorio organizacionRepositorio;
 
+	//metodo que lista todas las organizaciones
 	@Override
 	public List<Organizacion> findAll() {
 		List<Organizacion> organizaciones = new ArrayList<>();
@@ -27,13 +28,13 @@ public class ServicioOrganizacionImpl implements ServicioOrganizacion{
 		return organizaciones;
 	}
 	
+	//metodo que guarda las organizaciones
 	public void save(Organizacion organizaciones) {
 		organizacionRepositorio.save(organizaciones);
 		
 	}
 
-	
-	
+	//metodo para listar organizaciones por tipo especifico
 	@Override
 	public List<Organizacion> findByTipoDeOrganizacion(String tipoDeOrganizacion) {
 		List<Organizacion> organizaciones = new ArrayList<>();
@@ -44,6 +45,7 @@ public class ServicioOrganizacionImpl implements ServicioOrganizacion{
 		return organizaciones;
 	}
 
+	//metodo para eliminar organizacion por id
 	public void delete(long id) {
 		organizacionRepositorio.deleteById(id);
 		

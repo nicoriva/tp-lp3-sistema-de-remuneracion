@@ -22,6 +22,7 @@ public class OrganizacionController {
 	@Autowired
 	private ServicioOrganizacionImpl servicioOrganizacion;
 	
+	//lamada a metodo para listar todas las organizaciones
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public List<Organizacion> list() throws ValidarDatosException {
 		try {
@@ -32,6 +33,7 @@ public class OrganizacionController {
 		}
 	}	
 	
+	//llamada a metodo que lista organizaciones por un tipo especifico
 	@RequestMapping(value = "/{tipoDeOrganizacion}", method = RequestMethod.GET)
 	public List<Organizacion> greetings(@PathVariable("tipoDeOrganizacion") String tipoDeOrganizacion) throws ValidarDatosException {
 		try {
@@ -43,6 +45,7 @@ public class OrganizacionController {
 		}
 	}
 	
+	//llamada a metodo para agregar una organizacion
 	@PostMapping
 	public void add(@RequestBody Organizacion organizaciones) throws ValidarDatosException {
 		try {
@@ -52,6 +55,7 @@ public class OrganizacionController {
 		}
 	}
 	
+	//llamada a metodo para borrar organizacion por id
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable("id") long id) throws ValidarDatosException {
 		try {

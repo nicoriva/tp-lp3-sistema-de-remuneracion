@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan(basePackages = {"sistema"})
 public class Aplicacion {
 
+	//metodo main para ejecutar el programa
 	public static void main(String[] args) {
 		SpringApplication.run(Aplicacion.class, args);
 	}
